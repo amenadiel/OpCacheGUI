@@ -49,12 +49,14 @@ class APCUHelper
         $cache = self::getCache();
         $mem = self::getMem();
         $time = time();
+
         $cache['num_hits'] = isset($cache['num_hits']) ? $cache['num_hits'] : $cache['nhits'];
         $cache['num_misses'] = isset($cache['num_misses']) ? $cache['num_misses'] : $cache['nmisses'];
         $cache['start_time'] = isset($cache['start_time']) ? $cache['start_time'] : $cache['stime'];
         $cache['num_inserts'] = isset($cache['num_inserts']) ? $cache['num_inserts'] : $cache['ninserts'];
         $cache['num_entries'] = isset($cache['num_entries']) ? $cache['num_entries'] : $cache['nentries'];
-        $cache['num_expunges'] = isset($cache['num_expunges']) ? $cache['num_expunges'] : $cache['nexpunges'];
+        $cache['num_expunges'] = isset($cache['num_expunges']) ? $cache['num_expunges'] : $cache['expunges'];
+
         $mem_size = $mem['num_seg'] * $mem['seg_size'];
         $mem_avail = $mem['avail_mem'];
         $mem_used = $mem_size - $mem_avail;
@@ -96,7 +98,7 @@ class APCUHelper
 
         $this->generalinfo['uptime'] = self::duration($cache['start_time']);
 
-        $this->generalinfo['file_upload_progress'] = $cache['file_upload_progress'];
+        $this->generalinfo['file_upload_progress'] = isset($cache['file_upload_progress'])? $cache['file_upload_progress']:null;
         $this->runtimesettings = array_map(
             function ($setting) {
                 return $setting['local_value'];

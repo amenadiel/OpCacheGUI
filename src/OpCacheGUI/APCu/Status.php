@@ -91,6 +91,10 @@ class Status
         $sharedMemory.= $this->byteFormatter->format($this->memoryStatus['seg_size']) . ' ';
         $sharedMemory.= '(' . $this->cacheStatus['memory_type'] . ' memory' . ')';
 
+        echo '<pre>';
+        print_r( $sharedMemory );
+        echo '</pre>';
+
         return [
             'enabled'             => $this->config->getIniDirectives()['apc.enabled'],
             'file_upload_support' => $this->config->getIniDirectives()['apc.rfc1867'],
@@ -266,7 +270,7 @@ class Status
             'hit_rate_user'    => number_format($this->getHitRate(), 2),
             'miss_rate_user'   => number_format($this->getMissRate(), 2),
             'insert_rate_user' => number_format($this->getInsertRate(), 2),
-            'num_expunges'     => $this->cacheStatus['num_expunges'],
+            'num_expunges'     => $this->cacheStatus['expunges'],
         ];
     }
 

@@ -51,6 +51,8 @@ $uriScheme = Router::URL_REWRITE;
  * Only addresses on the whitelist are allowed to log in
  * The whitelist can contain a list of IP addresses or ranges in one of the following formats:
  *
+ *  echo password_hash(elpassword, PASSWORD_BCRYPT)."\n";
+ *
  * * allows any IP address to log in (effectively disabling the whitelist and allowing access from any IP)
  * localhost or 127.0.0.1 allows only log ins from the machine on which the application runs
  * 10.0.0.5 allows a single address access
@@ -61,9 +63,10 @@ $uriScheme = Router::URL_REWRITE;
  * Multiple addresses or ranges can be defined
  */
 $login = [
-    'username'  => 'peehaa',
-    'password'  => '$2y$14$kHoRlbxPF7Bf1903cDMTgeYBsFgF8aJA46LIH9Nsg4/ocDa9HTTbe',
-    'whitelist' => [
+    'username' => '',
+    'password' => '',
+    'whitelist' => ['*',
         'localhost',
+        '152.231.82.18',
     ],
 ];
